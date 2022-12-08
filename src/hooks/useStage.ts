@@ -10,20 +10,24 @@ export const useStage = (player: PlayerState, resetPlayer: () => void) => {
     setRowsCleared(0);
 
     const sweepRows = (newStage: StageType) => {
-      return newStage.reduce((acc, row) => {
+      let rowsCleared = 0;
+      const stageCleared = newStage.reduce((acc, row, idx) => {
         if (row.findIndex((cell) => cell[0] === 0) === -1) {
-          setRowsCleared((prev) => prev + 1);
+          rowsCleared++;
           const newRow = new Array<CellType>(newStage[0].length).fill([
             0,
             "clear",
           ]);
           acc.unshift(newRow);
           return acc;
+        } else {
+          acc.push(row);
+          return acc;
         }
-
-        acc.push(row);
-        return acc;
       }, [] as StageType);
+
+      setRowsCleared(rowsCleared);
+      return stageCleared;
     };
 
     const updateStage = (prevStage: StageType) => {
@@ -51,7 +55,13 @@ export const useStage = (player: PlayerState, resetPlayer: () => void) => {
     };
 
     setStage((prev) => updateStage(prev));
-  }, [player, resetPlayer]);
+  }, [
+    player.collided,
+    player.pos.x,
+    player.pos.y,
+    player.tetrominos,
+    resetPlayer,
+  ]);
 
   return { stage, rowsCleared, setStage };
 };

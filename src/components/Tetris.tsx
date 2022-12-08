@@ -17,8 +17,7 @@ const Tetris = () => {
 
   const { player, updatePlayerPos, resetPlayer, playerRotate } = usePlayer();
   const { stage, setStage, rowsCleared } = useStage(player, resetPlayer);
-  const { score, setScore, rows, setRows, level, setLevel } =
-    useGameStatus(rowsCleared);
+  const { score, rows, level, setLevel } = useGameStatus(rowsCleared);
 
   const movePlayer = (direction: number) => {
     if (!checkCollision(player, stage, { x: direction, y: 0 })) {
@@ -76,6 +75,10 @@ const Tetris = () => {
       dropPlayer();
     } else if (key === "ArrowUp" || key === "Space") {
       playerRotate(stage, 1);
+    } else {
+      dropPlayer();
+      dropPlayer();
+      dropPlayer();
     }
   };
 
