@@ -1,7 +1,7 @@
 export const STAGE_WIDTH = 12;
 export const STAGE_HEIGHT = 20;
 
-type CellType = [number | string, string];
+export type CellType = [number | string, string];
 export type StageType = CellType[][];
 
 type CreateStage = () => StageType;

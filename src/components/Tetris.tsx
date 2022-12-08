@@ -55,7 +55,7 @@ const Tetris = () => {
       movePlayer(1);
     } else if (key === "ArrowDown") {
       dropPlayer();
-    } else if (key === "ArrowUp") {
+    } else if (key === "ArrowUp" || key === "Space") {
       playerRotate(stage, 1);
     }
   };
