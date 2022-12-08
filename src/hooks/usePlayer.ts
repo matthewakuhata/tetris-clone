@@ -1,5 +1,7 @@
+import { off } from "process";
 import { useCallback, useState } from "react";
-import { STAGE_WIDTH } from "../helpers/stage-creator";
+import { checkCollision } from "../helpers/collision-detection";
+import { StageType, STAGE_WIDTH } from "../helpers/stage-creator";
 import { randomTetrisPiece, TETROMINOS } from "../helpers/tetrominos";
 
 export interface PlayerState {
@@ -32,6 +34,32 @@ export const usePlayer = () => {
     }));
   };
 
+  const rotate = (matrix: (string | number)[][], dir: number) => {
+    const rotated = matrix.map((_, index) => matrix.map((col) => col[index]));
+
+    if (dir > 0) return rotated.map((row) => row.reverse());
+    return rotated.reverse();
+  };
+
+  const playerRotate = (stage: StageType, dir: number) => {
+    const clonedPlayer = JSON.parse(JSON.stringify(player)) as PlayerState;
+    clonedPlayer.tetrominos = rotate(clonedPlayer.tetrominos, dir);
+
+    const pos = clonedPlayer.pos.x;
+    let offset = 1;
+    while (checkCollision(clonedPlayer, stage, { x: 0, y: 0 })) {
+      clonedPlayer.pos.x += offset;
+      offset = -(offset + (offset > 0 ? 1 : -1));
+      if (offset > clonedPlayer.tetrominos[0].length) {
+        rotate(clonedPlayer.tetrominos, -dir);
+        clonedPlayer.pos.x = pos;
+        return;
+      }
+    }
+
+    setPlayer(clonedPlayer);
+  };
+
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
@@ -40,5 +68,5 @@ export const usePlayer = () => {
     });
   }, []);
 
-  return { player, updatePlayerPos, resetPlayer };
+  return { player, updatePlayerPos, resetPlayer, playerRotate };
 };

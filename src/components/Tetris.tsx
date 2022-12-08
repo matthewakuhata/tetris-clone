@@ -14,7 +14,7 @@ const Tetris = () => {
   const [droptime, setDroptime] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  const { player, updatePlayerPos, resetPlayer } = usePlayer();
+  const { player, updatePlayerPos, resetPlayer, playerRotate } = usePlayer();
   const { stage, setStage } = useStage(player, resetPlayer);
 
   const movePlayer = (direction: number) => {
@@ -55,6 +55,8 @@ const Tetris = () => {
       movePlayer(1);
     } else if (key === "ArrowDown") {
       dropPlayer();
+    } else if (key === "ArrowUp") {
+      playerRotate(stage, 1);
     }
   };
 
