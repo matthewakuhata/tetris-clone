@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import bgImage from '../../img/bg.png';
+import bgImage from "../../img/bg.png";
 
 export const StyledTetrisWrapper = styled.div`
   width: 100vw;
@@ -12,7 +12,8 @@ export const StyledTetrisWrapper = styled.div`
 
 export const StyledTetris = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   padding: 40px;
   margin: 0 auto;
   max-width: 900px;
