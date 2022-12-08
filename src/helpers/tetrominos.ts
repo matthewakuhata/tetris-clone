@@ -18,14 +18,12 @@ export const TETROMINOS: { [key: string]: TetrisPiece } = {
     shape: [
       [0, "J", 0],
       [0, "J", 0],
-      [0, "J", 0],
       ["J", "J", 0],
     ],
     color: "26, 95, 223",
   },
   L: {
     shape: [
-      [0, "L", 0],
       [0, "L", 0],
       [0, "L", 0],
       [0, "L", "L"],
@@ -43,13 +41,11 @@ export const TETROMINOS: { [key: string]: TetrisPiece } = {
     shape: [
       [0, "S", "S"],
       ["S", "S", 0],
-      [0, 0, 0],
     ],
     color: "48, 211, 56",
   },
   T: {
     shape: [
-      [0, 0, 0],
       ["T", "T", "T"],
       [0, "T", 0],
     ],
@@ -59,7 +55,6 @@ export const TETROMINOS: { [key: string]: TetrisPiece } = {
     shape: [
       ["Z", "Z", 0],
       [0, "Z", "Z"],
-      [0, 0, 0],
     ],
     color: "227, 78, 78",
   },
@@ -68,7 +63,7 @@ export const TETROMINOS: { [key: string]: TetrisPiece } = {
 export const randomTetrisPiece = () => {
   const tetrominos = "IJLOSTZ";
   const randomTetromino =
-    tetrominos[Math.floor(Math.random()) * tetrominos.length];
-
+    tetrominos[Math.floor(Math.random() * tetrominos.length)];
+  console.log("random", Math.floor(Math.random() * tetrominos.length));
   return TETROMINOS[randomTetromino];
 };

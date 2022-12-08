@@ -1,6 +1,7 @@
 import styled from "styled-components";
 interface StyledCellProps {
-  type: number;
+  type: number | string;
+  color: string;
 }
 
 export const StyledCell = styled.div<StyledCellProps>`

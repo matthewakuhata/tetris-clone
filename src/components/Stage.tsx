@@ -1,6 +1,8 @@
 import React from "react";
-import { StageType } from "../helpers/stage-creator";
+
 import Cell from "./Cell";
+import { StageType } from "../helpers/stage-creator";
+import { StyledStage } from "./styles/StyledStage";
 
 export interface StageProps {
   stage: StageType;
@@ -8,11 +10,11 @@ export interface StageProps {
 
 const Stage: React.FC<StageProps> = ({ stage }) => {
   return (
-    <div>
+    <StyledStage width={stage[0].length} height={stage.length}>
       {stage.map((row) =>
         row.map((cell, x) => <Cell key={x} type={cell[0]} />)
       )}
-    </div>
+    </StyledStage>
   );
 };
 

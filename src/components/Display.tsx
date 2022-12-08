@@ -1,7 +1,14 @@
 import React from "react";
+import { StyledDisplay } from "./styles/StyledDisplay";
 
-const Display = ({ gameover, text }: { gameover: boolean; text: string }) => {
-  return <div>Display</div>;
+const Display = ({
+  gameover = false,
+  text,
+}: {
+  gameover?: boolean;
+  text: string;
+}) => {
+  return <StyledDisplay gameOver={gameover}>{text}</StyledDisplay>;
 };
 
 export default Display;
