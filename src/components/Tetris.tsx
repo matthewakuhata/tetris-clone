@@ -11,7 +11,7 @@ import { create } from "domain";
 import { checkCollision } from "../helpers/collision-detection";
 
 const Tetris = () => {
-  const [droptime, setDroptime] = useState(null);
+  const [droptime, setDroptime] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
   const { player, updatePlayerPos, resetPlayer } = usePlayer();
@@ -26,11 +26,19 @@ const Tetris = () => {
   const startGame = () => {
     setStage(createStage());
     resetPlayer();
+    setGameOver(false);
   };
 
   const drop = () => {
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
       updatePlayerPos({ x: 0, y: 1, collided: false });
+    } else {
+      if (player.pos.y < 1) {
+        setGameOver(true);
+        setDroptime(0);
+      }
+
+      updatePlayerPos({ x: 0, y: 0, collided: true });
     }
   };
 
