@@ -75,11 +75,17 @@ const Tetris = () => {
       dropPlayer();
     } else if (key === "ArrowUp" || key === "Space") {
       playerRotate(stage, 1);
-    } else {
-      dropPlayer();
-      dropPlayer();
-      dropPlayer();
+    } else if (key === " ") {
+      snapToBottom();
     }
+  };
+
+  const snapToBottom = () => {
+    let spaces = 1;
+    while (!checkCollision(player, stage, { x: 0, y: spaces })) {
+      spaces++;
+    }
+    updatePlayerPos({ x: 0, y: spaces - 1, collided: true });
   };
 
   useInterval(() => {
