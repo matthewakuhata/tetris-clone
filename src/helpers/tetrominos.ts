@@ -41,11 +41,13 @@ export const TETROMINOS: { [key: string]: TetrisPiece } = {
     shape: [
       [0, "S", "S"],
       ["S", "S", 0],
+      [0, 0, 0],
     ],
     color: "48, 211, 56",
   },
   T: {
     shape: [
+      [0, 0, 0],
       ["T", "T", "T"],
       [0, "T", 0],
     ],
@@ -55,6 +57,7 @@ export const TETROMINOS: { [key: string]: TetrisPiece } = {
     shape: [
       ["Z", "Z", 0],
       [0, "Z", "Z"],
+      [0, 0, 0],
     ],
     color: "227, 78, 78",
   },
